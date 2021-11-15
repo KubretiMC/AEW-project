@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" rel="stylesheet">
+    <link href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css" rel="stylesheet">
+    </link>
+    <link href="css/custom.css" rel="stylesheet">
+
+    <title>Software technologies 2021/2022</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row mt-3 mt-md-5">
+            <div>
+                <div class="card mt-2 mt-md-0">
+                    <div class="card-body">
+                        <form>
+                            <div>
+                                <label class="form-label" for="filter-sort">Filter </label>
+                                <select id="filter-sort">
+                                    <option value="wins">Wins</option>
+                                    <option value="loses">Loses</option>
+                                    <option value="debutYear">Year of debut</option>
+                                </select>
+                                <input class="form-check-input genre-checkbox" type="radio" value="wrestler"
+                                    onclick="check('wrestlers')" id="wrestlers">
+                                <label class="form-check-label" for="wrestlers">
+                                    Wrestlers
+                                </label>
+                                <input class="form-check-input genre-checkbox" type="radio" value="commentator"
+                                    onclick="check('commentators')" id="commentators">
+                                <label class="form-check-label" for="action">
+                                    Commentators
+                                </label>
+                                <input class="form-check-input genre-checkbox" type="radio" value="referee"
+                                    onclick="check('referees')" id="referees">
+                                <label class="form-check-label" for="referees">
+                                    Referees
+                                </label>
+                                <button id="get-wrestlers" type="button" class="btn btn-primary">Filter</button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <!-- api call part -->
+            <div class="col">
+                <div class="card mt-2 mt-md-0">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h5 class="card-title">AEW Roster</h5>
+                            <div class="btn-group" role="group" aria-label="Switch view">
+                                <button id="list-view" type="button" class="btn btn-primary">
+                                    <i class="fas fa-th-list"></i>
+                                </button>
+                                <button id="grid-view" type="button" class="btn btn-outline-primary">
+                                    <i class="fas fa-grip-horizontal"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                        <hr />
+                        <div id="roster-list" class="row">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- footer -->
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                    <svg class="bi" width="30" height="24">
+                        <use xlink:href="#bootstrap"></use>
+                    </svg>
+                </a>
+                <span class="text-muted">© 2021 Mariyan, Inc</span>
+            </div>
+
+            <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+                <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                            <use xlink:href="#twitter"></use>
+                        </svg></a></li>
+                <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                            <use xlink:href="#instagram"></use>
+                        </svg></a></li>
+                <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                            <use xlink:href="#facebook"></use>
+                        </svg></a></li>
+            </ul>
+        </footer>
+    </div>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"
+        integrity="sha256-hlKLmzaRlE8SCJC1Kw8zoUbU8BxA+8kR3gseuKfMjxA=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment-with-locales.min.js"></script>
+    <script src="js/roster.js"></script>
+    <script>
+        function check(type) {
+            document.getElementById("wrestlers").checked = false;
+            document.getElementById("commentators").checked = false;
+            document.getElementById("referees").checked = false;
+            document.getElementById(type).checked = true;
+        }
+    </script>
+
+
+    <div id="wrestler-list-template" class="d-none">
+        <!-- <div class="d-flex py-1"> same row -->
+        <div>
+            <div class="fw-bold wrestler-name"></div>
+            <img class="wrestler-poster" src="">
+            <div class="flex-grow-1">
+                <div class="d-flex align-items-start justify-content-between">
+                    <div class="d-flex py-1">
+                        <div style="padding-right: 10px"><b>Wins</b></div>
+                        <div style="padding-inline: 20px"><b>Loses</b></div>
+                        <div style="padding-inline: 20px"><b>Debut Year</b></div>
+                        <div style="padding-inline: 20px"><b>Type</b></div>
+                    </div>
+                </div>
+                <div class="d-flex align-items-start justify-content-between">
+                    <div class="d-flex py-1">
+                        <div style="padding-right: 10px" class="wins"></div>
+                        <div style="padding-inline: 48px" class="loses"></div>
+                        <div style="padding-left: 25px" class="debutYear"></div>
+                        <div style="padding-left: 88px" class="type"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="my-1">
+    </div>
+
+    <div id="wrestler-grid-template" class="d-none">
+        <div class="col-md-3">
+            <div class="grid-wrestler-container img-thumbnail mb-3">
+                <div class="fw-bold wrestler-name"></div>
+                <div class="d-flex">
+                    <img class="wrestler-poster w-50" src="">
+                    <div class="px-2 w">
+                        <b>Wins</b>
+                        <div class="wins"></div>
+                        <b>Loses</b>
+                        <div class="loses"></div>
+                        <b>Debut year</b>
+                        <div class="debutYear"></div>
+                        <b>Type</b>
+                        <div class="type"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
