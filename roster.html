@@ -125,7 +125,7 @@
         <!-- <div class="d-flex py-1"> same row -->
         <div>
             <div class="fw-bold wrestler-name"></div>
-            <img class="wrestler-poster" src="">
+            <img class="wrestler-poster" src="" id="image">
             <div class="flex-grow-1">
                 <div class="d-flex align-items-start justify-content-between">
                     <div class="d-flex py-1">
@@ -153,7 +153,7 @@
             <div class="grid-wrestler-container img-thumbnail mb-3">
                 <div class="fw-bold wrestler-name"></div>
                 <div class="d-flex">
-                    <img class="wrestler-poster w-50" src="">
+                    <img class="wrestler-poster" src="" id="image-2">
                     <div class="px-2 w">
                         <b>Wins</b>
                         <div class="wins"></div>
@@ -168,6 +168,19 @@
             </div>
         </div>
     </div>
+
+    <script>
+        var image = document.getElementById("image");
+        if (image && image.style) {
+            image.style.width = '800px';
+            image.style.height = '800px';
+        }
+        image = document.getElementById("image-2");
+        if (image && image.style) {
+            image.style.width = '500';
+            image.style.height = '240px';
+        }
+    </script>
 </body>
 
 </html>
